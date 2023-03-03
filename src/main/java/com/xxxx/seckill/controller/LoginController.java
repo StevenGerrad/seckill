@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 // 不能用restcontroller，会默认加body
@@ -28,12 +30,12 @@ public class LoginController {
 
     @RequestMapping("/doLogin")
     @ResponseBody
-    public RespBean doLogin(@Valid LoginVo loginVo){
+    public RespBean doLogin(@Valid LoginVo loginVo, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
         // 传入参数LoginVo前加Valid注解，LoginVo中的注解才能生效
 
         // 引入了 Slf4j 可以直接使用log
         // log.info("{}", loginVo);
         // return null;
-        return userService.doLogin(loginVo);
+        return userService.doLogin(loginVo, httpServletRequest, httpServletResponse);
     }
 }
