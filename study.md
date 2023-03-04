@@ -20,12 +20,15 @@ CREATE TABLE t_user(
 
 [代码生成器](https://baomidou.com/pages/d357af/)
 
+[redis安装](https://blog.csdn.net/web18484626332/article/details/126540454)
+
+redis docker 安装：[1](https://cloud.tencent.com/developer/article/1670205),[2](https://www.jianshu.com/p/f62277cf5d0f)
 
 
 # Q & A
 
-| 报错                                                                                    | 解决                                                                                                                             |
-|---------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| 项目运行报错`Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required`               | [1](https://cloud.tencent.com/developer/article/2177573),[2](https://github.com/baomidou/mybatis-plus/pull/4870)               |
+| 报错                                                                                   | 解决                                                                                                                             |
+|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| 项目运行报错`Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required`            | [1](https://cloud.tencent.com/developer/article/2177573),[2](https://github.com/baomidou/mybatis-plus/pull/4870)               |
 | maven build报错`Cannot resolve plugin org.apache.maven.plugins:maven-clean-plugin3.0.0` | [1](https://blog.csdn.net/m0_67392126/article/details/124165634),[2](https://blog.csdn.net/liujucai/article/details/102450806) |
-
+| Redis安装报错：`You need tcl 8.5 or newer in order to run the Redis test`                  | [1](https://blog.csdn.net/zhangshu123321/article/details/51440106)                                                             |
