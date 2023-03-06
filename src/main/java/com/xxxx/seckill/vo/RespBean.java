@@ -17,7 +17,8 @@ public class RespBean {
     }
 
     public static RespBean success(Object obj){
-        return new RespBean(RespBeanEnum.SUCCESS.getCode(), RespBeanEnum.SUCCESS.getMessage(), obj);
+        //return new RespBean(RespBeanEnum.SUCCESS.getCode(), RespBeanEnum.SUCCESS.getMessage(), obj);
+        return new RespBean(RespBeanEnum.SUCCESS.getCode(), RespBean.success().getMessage(), obj);
     }
 
     public static RespBean error(RespBeanEnum respBeanEnum){
