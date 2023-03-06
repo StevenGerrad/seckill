@@ -30,4 +30,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         List<GoodsVo> goods = goodsMapper.findGoodsVo();
         return goods;
     }
+
+    @Override
+    public GoodsVo findGoodsVoByGoodsId(Long goodsId){
+        return goodsMapper.findGoodsVoByGoodsId(goodsId);
+    }
 }
