@@ -36,19 +36,26 @@ public class GoodsController {
     //    }
     //    model.addAttribute("user", user);
     //    return "goodsList";
+    //    // 采用这种方式在多台服务器时会出问题，参考p13，或pdf: 分布式Session问题
+    //}
+
+    //@RequestMapping("/toList")
+    //public String toList(HttpServletRequest request, HttpServletResponse response, Model model, @CookieValue("userTicket") String ticket){
+    //    // TODO：为什么这里可以有这样session参数可以换成req与resp了？
+    //    if(StringUtils.isEmpty(ticket)){
+    //        return "login";
+    //    }
+    //    // 相当于有一个单独存放的服务器，不是到tomcat中找信息（参考文档），而是到redis里面去找信息
+    //    User user = userService.getUserByCookie(ticket, request, response);
+    //    if(null == user){
+    //        return "login";
+    //    }
+    //    model.addAttribute("user", user);
+    //    return "goodsList";
     //}
 
     @RequestMapping("/toList")
-    public String toList(HttpServletRequest request, HttpServletResponse response, Model model, @CookieValue("userTicket") String ticket){
-        // TODO：为什么这里可以有这样session参数可以换成req与resp了？
-        if(StringUtils.isEmpty(ticket)){
-            return "login";
-        }
-        // 相当于有一个单独存放的服务器，不是到tomcat中找信息（参考文档），而是到redis里面去找信息
-        User user = userService.getUserByCookie(ticket, request, response);
-        if(null == user){
-            return "login";
-        }
+    public String toList(Model model, User user){
         model.addAttribute("user", user);
         return "goodsList";
     }
