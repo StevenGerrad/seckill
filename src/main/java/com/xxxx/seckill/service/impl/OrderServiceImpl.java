@@ -39,6 +39,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         // 秒杀商品减库存
         SeckillGoods seckillGoods = seckillGoodsService.getOne(new QueryWrapper<SeckillGoods>().eq("goods_id", goods.getId()));
         seckillGoods.setStockCount(seckillGoods.getStockCount() - 1);
+        // TODO：这里直接用raw的sql语句？包装成事务？（这里实际上是没有用到事务的概念的吧）
         seckillGoodsService.updateById(seckillGoods);
 
         // 生成订单

@@ -23,6 +23,17 @@ CREATE TABLE t_user(
 
 [redis安装](https://blog.csdn.net/web18484626332/article/details/126540454)
 
+```bash
+# 进入容器
+docker exec -it redis bash
+# 启动 redis 客户端
+redis-cli
+
+redis 127.0.0.1:6379> PING
+PONG
+
+```
+
 redis docker 安装：[1](https://cloud.tencent.com/developer/article/1670205),[2](https://www.jianshu.com/p/f62277cf5d0f)
 
 ```sql
@@ -81,7 +92,31 @@ INSERT INTO `t_seckill_goods` VALUES(1, 1, '629', 10, '2020-11-01 08:00:00', '20
 ```
 
 
+linux安装mysql: [1](https://www.runoob.com/docker/docker-install-mysql.html),[2](https://www.cnblogs.com/sablier/p/11605606.html)
 
+```bash
+#进入容器
+docker exec -it wjyMysql bash
+
+#登录mysql
+mysql -u root -p
+
+```
+
+```mysql
+# ALTER USER 'root'@'localhost' IDENTIFIED BY 'Lzslov123!';
+
+#添加远程登录用户
+CREATE USER 'xxxx'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+GRANT ALL PRIVILEGES ON *.* TO 'xxxx'@'%';
+
+exit;
+```
+
+
+p30-p36不实践了，没时间了
+
+配置自动注释：[《IDEA 方法注释动态添加param和return》](https://www.bilibili.com/read/cv22276744)
 
 
 # Q & A

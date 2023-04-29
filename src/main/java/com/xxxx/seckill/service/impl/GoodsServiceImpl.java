@@ -24,6 +24,12 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Autowired
     private GoodsMapper goodsMapper;
 
+    /**
+     * @description 返回当前的商品列表
+     * @return List<GoodsVo>
+     * @author wangjunyou
+     * @date 2023/4/24 10:29
+     */
     @Override
     public List<GoodsVo> findGoodsVo(){
         //return goodsMapper.findGoodsVo();
@@ -31,6 +37,14 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         return goods;
     }
 
+    /**
+     * @description 按商品id查询商品信息
+     * @param goodsId
+     * defaultParamDescription
+     * @return GoodsVo
+     * @author wangjunyou
+     * @date 2023/4/24 10:30
+     */
     @Override
     public GoodsVo findGoodsVoByGoodsId(Long goodsId){
         return goodsMapper.findGoodsVoByGoodsId(goodsId);

@@ -26,12 +26,27 @@ public class SecKillController {
     @Autowired
     private IOrderService orderService;
 
+    /**
+     * @description
+     * windows 优化前(1000 kernal * 1) QPS: 30.3
+     * windows 优化前(1000 kernal * 3) QPS: 29.9 (注意要设置循环数，才会出现库存为负数的问题)
+     * @param model
+     * defaultParamDescription
+     * @param user
+     * defaultParamDescription
+     * @param goodsId
+     * defaultParamDescription
+     * @return String
+     * @author Administrator
+     * @date 2023/4/22 21:51
+     */
     @RequestMapping("/doSeckill")
     public String doSecKill(Model model, User user, Long goodsId){
         if(user == null){
             return "login";
         }
         model.addAttribute("user", user);
+        // TODO：这里不是应该查询秒杀商品的库存吗
         GoodsVo goods = goodsService.findGoodsVoByGoodsId(goodsId);
         // 判断库存
         if(goods.getStockCount() < 1){
@@ -45,9 +60,11 @@ public class SecKillController {
             model.addAttribute("errmsg", RespBeanEnum.REPEATE_ERROR.getMessage());
             return "secKillFail";
         }
+        // TODO: 这里难道不需要像 toDetail 一样判断一下秒杀状态吗？被跳过 toDetail 直接攻击这个接口怎么办？
         Order order = orderService.seckill(user, goods);
         model.addAttribute("order", order);
         model.addAttribute("goods", goods);
+
         // TODO：看一下这个spring ui Model 是啥，怎么什么都往里加
         return "orderDetail";
     }
