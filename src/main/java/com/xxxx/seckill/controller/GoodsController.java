@@ -83,6 +83,9 @@ public class GoodsController {
     /**
      * @description defaultDescription
      * windows 优化前(1000 kernal * 3) QPS: 909.4
+     * windows p38 优化(1000 kernal * 3) QPS: 3722.4
+     * windows 优化前(5000 kernal * 3) QPS: 1247
+     * windows p38 优化(5000 kernal * 3) QPS: 4519
      * @param model
      * defaultParamDescription
      * @param user
