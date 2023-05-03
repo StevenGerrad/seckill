@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.xxxx.seckill.pojo.Order;
 import com.xxxx.seckill.pojo.User;
 import com.xxxx.seckill.vo.GoodsVo;
+import com.xxxx.seckill.vo.OrderDetailVo;
 
 /**
  * <p>
@@ -16,4 +17,6 @@ import com.xxxx.seckill.vo.GoodsVo;
 public interface IOrderService extends IService<Order> {
 
     Order seckill(User user, GoodsVo goods);
+
+    OrderDetailVo detail(Long orderId);
 }
