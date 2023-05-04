@@ -28,4 +28,16 @@ public class MQSender {
         rabbitTemplate.convertAndSend("directExchange","queue.green", msg);
     }
 
+    public void send03(Object msg){
+        log.info("发送消息(Queue01接收)" + msg);
+        // 发消息时携带的路由key必须和刚刚绑定的一样
+        rabbitTemplate.convertAndSend("topicExchange","queue.red.message", msg);
+    }
+
+    public void send04(Object msg){
+        log.info("发送消息(被两个Queue接收)" + msg);
+        // 发消息时携带的路由key必须和刚刚绑定的一样
+        rabbitTemplate.convertAndSend("topicExchange","green.queue.message", msg);
+    }
+
 }
