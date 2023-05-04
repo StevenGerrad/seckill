@@ -126,3 +126,12 @@ p30-p36不实践了，没时间了
 | 项目运行报错`Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required`            | [1](https://cloud.tencent.com/developer/article/2177573),[2](https://github.com/baomidou/mybatis-plus/pull/4870)               |
 | maven build报错`Cannot resolve plugin org.apache.maven.plugins:maven-clean-plugin3.0.0` | [1](https://blog.csdn.net/m0_67392126/article/details/124165634),[2](https://blog.csdn.net/liujucai/article/details/102450806) |
 | Redis安装报错：`You need tcl 8.5 or newer in order to run the Redis test`                  | [1](https://blog.csdn.net/zhangshu123321/article/details/51440106)                                                             |
+
+
+rabbitmq安装参考[《docker安装RabbitMq》](https://juejin.cn/post/6844903970545090574)
+
+```bash
+docker pull docker.io/rabbitmq:3.10-management
+
+docker run --name wjyRabbitmq -d -p 15672:15672 -p 5672:5672 9347c9953e5a
+```
