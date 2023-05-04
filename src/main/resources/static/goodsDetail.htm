@@ -41,10 +41,13 @@
         <span id="seckillTip"></span>
       </td>
       <td>
-        <form id="secKillForm" method="post" action="/seckill/doSeckill">
+        <!-- <form id="secKillForm" method="post" action="/seckill/doSeckill"> -->
+        <!--   <input type="hidden" name="goodsId" id="goodsId"> -->
+        <!--   <button class="btn btn-primary btn-block" type="submit" id="buyButton">立即秒杀</button> -->
+        <!-- </form> -->
+        <button class="btn btn-primary btn-block" type="button" id="buyButton" onclick="doSeckill()">立即秒杀
           <input type="hidden" name="goodsId" id="goodsId">
-          <button class="btn btn-primary btn-block" type="submit" id="buyButton">立即秒杀</button>
-        </form>
+        </button>
       </td>
     </tr>
     <tr>
@@ -67,6 +70,66 @@
     // countDown();
     getDetails();
   });
+
+  function doSeckill(){
+    $.ajax({
+      url: '/seckill/doSeckill',
+      type: 'POST',
+      data:{
+        goodsId: $("#goodsId").val()
+      },
+      success: function(data){
+        if(data.code == 200){
+          // p40
+          // window.location.href = "/orderDetail.htm?orderId=" + data.obj.id;
+          // p54
+          getResult($("#goodsId").val());
+        } else {
+          layer.msg("客户端返回出错:" + data.message);
+        }
+      },
+      error:function (){
+        layer.msg("客户端请求出错");
+      }
+    })
+  }
+
+  function getResult(goodsId){
+    g_showLoading();
+    $.ajax({
+      url: '/seckill/result',
+      type: 'GET',
+      data:{
+        goodsId: goodsId,
+      },
+      success:function (data){
+        if(data.code == 200){
+          var result = data.obj;
+          if(result < 0){
+            layer.msg("对不起，秒杀失败");
+          } else if(result == 0){
+            setTimeout(function (){
+              getResult(goodsId);
+            }, 50);
+          } else{
+            layer.confirm("太好了哥，秒杀成功了！查看订单？", {btn:["确定", "取消"]},
+                    function(){
+                      window.location.href="/orderDetail.htm?orderId=" + result;
+                    },
+                    function(){
+                      layer.close();
+                    }
+            );
+          }
+        } else {
+          layer.msg("客户端返回出错");
+        }
+      },
+      error:function (){
+        layer.msg("客户端请求出错");
+      }
+    })
+  }
 
   function getDetails(){
     var goodsId = g_getQueryString("goodsId");
