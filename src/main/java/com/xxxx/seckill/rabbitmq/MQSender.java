@@ -15,4 +15,17 @@ public class MQSender {
         log.info("发送消息" + msg);
         rabbitTemplate.convertAndSend("fanoutExchange","", msg);
     }
+
+    public void send01(Object msg){
+        log.info("发送red消息" + msg);
+        // 发消息时携带的路由key必须和刚刚绑定的一样
+        rabbitTemplate.convertAndSend("directExchange","queue.red", msg);
+    }
+
+    public void send02(Object msg){
+        log.info("发送green消息" + msg);
+        // 发消息时携带的路由key必须和刚刚绑定的一样
+        rabbitTemplate.convertAndSend("directExchange","queue.green", msg);
+    }
+
 }
