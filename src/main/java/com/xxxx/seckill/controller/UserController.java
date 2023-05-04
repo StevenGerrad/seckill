@@ -49,4 +49,10 @@ public class UserController {
     public void mq(){
         mqSender.send("Hello");
     }
+
+    @RequestMapping("/mq/fanout")
+    @ResponseBody
+    public void mq01(){
+        mqSender.send("Hello");
+    }
 }
