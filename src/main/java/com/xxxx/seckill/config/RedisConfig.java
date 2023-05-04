@@ -29,14 +29,21 @@ public class RedisConfig {
         return redisTemplate;
     }
 
+    // @Bean
+    // public DefaultRedisScript<Boolean> script() {
+    // 	DefaultRedisScript<Boolean> redisScript = new DefaultRedisScript<>();
+    // 	//lock.lua脚本位置和application.yml同级目录
+    // 	redisScript.setLocation(new ClassPathResource("lock.lua"));
+    // 	redisScript.setResultType(Boolean.class);
+    // 	return redisScript;
+    // }
+
     @Bean
-    public DefaultRedisScript<Boolean> script() {
-    	DefaultRedisScript<Boolean> redisScript = new DefaultRedisScript<>();
-    	//lock.lua脚本位置和application.yml同级目录
-    	redisScript.setLocation(new ClassPathResource("lock.lua"));
-    	redisScript.setResultType(Boolean.class);
-    	return redisScript;
+    public DefaultRedisScript<Long> script() {
+        DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
+        //放在和application.yml 同层目录下
+        redisScript.setLocation(new ClassPathResource("stock.lua"));
+        redisScript.setResultType(Long.class);
+        return redisScript;
     }
-
-
 }
