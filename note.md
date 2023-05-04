@@ -32,6 +32,9 @@ redis-cli
 redis 127.0.0.1:6379> PING
 PONG
 
+# 批量删除某种前缀, 实际上更稳妥的可能额要参考https://juejin.cn/post/6844903869412016142（使用scan删除）
+redis-cli keys "order:*" | xargs redis-cli del
+
 ```
 
 redis docker 安装：[1](https://cloud.tencent.com/developer/article/1670205),[2](https://www.jianshu.com/p/f62277cf5d0f)

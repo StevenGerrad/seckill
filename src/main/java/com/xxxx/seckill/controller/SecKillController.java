@@ -51,6 +51,7 @@ public class SecKillController implements InitializingBean {
      * windows 优化前(1000 kernal * 1) QPS: 30.3
      * windows 优化前(1000 kernal * 3) QPS: 29.9 (注意要设置循环数，才会出现库存为负数的问题)
      *         缓存优化(1000 * 3) QPS: 556.8
+     *         接口优化(1000 * 3) QPS: 1048.6
      * @param model
      * defaultParamDescription
      * @param user
