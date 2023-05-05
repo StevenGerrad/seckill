@@ -116,9 +116,6 @@ GRANT ALL PRIVILEGES ON *.* TO 'xxxx'@'%';
 exit;
 ```
 
-
-p30-p36不实践了，没时间了
-
 配置自动注释：[《IDEA 方法注释动态添加param和return》](https://www.bilibili.com/read/cv22276744)
 
 
@@ -138,3 +135,5 @@ docker pull docker.io/rabbitmq:3.10-management
 
 docker run --name wjyRabbitmq -d -p 15672:15672 -p 5672:5672 9347c9953e5a
 ```
+
+安装验证码插件jdk19太高了，需要安装新的jdk（参考[《为win10配置多个jdk的方法》](https://zhuanlan.zhihu.com/p/471479970)），同时切换IDEA中jdk的版本（参考[《IDEA项目如何切换JDK版本》](https://blog.csdn.net/weixin_45490198/article/details/125119932)）
