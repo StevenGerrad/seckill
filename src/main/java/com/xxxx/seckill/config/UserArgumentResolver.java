@@ -27,15 +27,20 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         return clazz == User.class;
     }
 
+    // @Override
+    // public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+    //     HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
+    //     HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
+    //     // P63 注释掉，同样的功能在AccessLimit中有实现了
+    //     String ticket = CookieUtil.getCookieValue(request, "userTicket");
+    //     if(StringUtils.isEmpty(ticket)){
+    //         return null;
+    //     }
+    //     return userService.getUserByCookie(ticket, request, response);
+    // }
+
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-        HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
-        HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
-        String ticket = CookieUtil.getCookieValue(request, "userTicket");
-        if(StringUtils.isEmpty(ticket)){
-            return null;
-        }
-
-        return userService.getUserByCookie(ticket, request, response);
+        return UserContext.getUser();
     }
 }

@@ -3,6 +3,7 @@ package com.xxxx.seckill.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wf.captcha.ArithmeticCaptcha;
+import com.xxxx.seckill.config.AccessLimit;
 import com.xxxx.seckill.exception.GlobalException;
 import com.xxxx.seckill.pojo.Order;
 import com.xxxx.seckill.pojo.SeckillMessage;
@@ -249,6 +250,42 @@ public class SecKillController implements InitializingBean {
     //     return RespBean.success(str);
     // }
 
+    // @RequestMapping(value = "/path", method = RequestMethod.GET)
+    // @ResponseBody
+    // public RespBean getPath(User user, Long goodsId, String captcha, HttpServletRequest request){
+    //     if(user == null){
+    //         return RespBean.error(RespBeanEnum.SESSION_ERROR);
+    //     }
+    //
+    //     // P62 简单接口限流
+    //     ValueOperations valueOperations = redisTemplate.opsForValue();
+    //     // 计数器方式：限制访问次数，5秒内访问5次
+    //     // 一般设置为最大能够承受QPS的70%-80%
+    //     // 问题：在两个时间区间的连接处大量涌入，还是实质上会压力过大，同时时间区间的部分时间段实质上空闲，浪费资源
+    //     String uri = request.getRequestURI();
+    //     captcha = "0";
+    //     // TODO：这个对吗？uri就是"/seckill/path:13000000258"
+    //     Integer count = (Integer) valueOperations.get(uri + ":" + user.getId());
+    //     if(count == null){
+    //         valueOperations.set(uri + ":" + user.getId(), 1, 5, TimeUnit.SECONDS);
+    //     } else if(count < 5){
+    //         valueOperations.increment(uri + ":" + user.getId());
+    //     } else{
+    //         return RespBean.error(RespBeanEnum.ACCESS_LIMIT_REAHCED);
+    //     }
+    //     // 漏斗方式：保护他人
+    //     // 令牌桶算法：保护自己
+    //     // 同时这段代码需要在每个接口都拷一遍——拦截器
+    //
+    //     boolean check = orderService.checkCaptcha(user, goodsId, captcha);
+    //     if(!check){
+    //         return RespBean.error(RespBeanEnum.ERROR_CAPTCHA);
+    //     }
+    //     String str = orderService.createPath(user, goodsId);
+    //     return RespBean.success(str);
+    // }
+
+    @AccessLimit(second = 5, maxCount=5, needLogin=true)
     @RequestMapping(value = "/path", method = RequestMethod.GET)
     @ResponseBody
     public RespBean getPath(User user, Long goodsId, String captcha, HttpServletRequest request){
@@ -256,25 +293,25 @@ public class SecKillController implements InitializingBean {
             return RespBean.error(RespBeanEnum.SESSION_ERROR);
         }
 
-        // P62 简单接口限流
-        ValueOperations valueOperations = redisTemplate.opsForValue();
-        // 计数器方式：限制访问次数，5秒内访问5次
-        // 一般设置为最大能够承受QPS的70%-80%
-        // 问题：在两个时间区间的连接处大量涌入，还是实质上会压力过大，同时时间区间的部分时间段实质上空闲，浪费资源
-        String uri = request.getRequestURI();
-        captcha = "0";
-        // TODO：这个对吗？uri就是"/seckill/path:13000000258"
-        Integer count = (Integer) valueOperations.get(uri + ":" + user.getId());
-        if(count == null){
-            valueOperations.set(uri + ":" + user.getId(), 1, 5, TimeUnit.SECONDS);
-        } else if(count < 5){
-            valueOperations.increment(uri + ":" + user.getId());
-        } else{
-            return RespBean.error(RespBeanEnum.ACCESS_LIMIT_REAHCED);
-        }
-        // 漏斗方式：保护他人
-        // 令牌桶算法：保护自己
-        // 同时这段代码需要在每个接口都拷一遍
+        // // P62 简单接口限流
+        // ValueOperations valueOperations = redisTemplate.opsForValue();
+        // // 计数器方式：限制访问次数，5秒内访问5次
+        // // 一般设置为最大能够承受QPS的70%-80%
+        // // 问题：在两个时间区间的连接处大量涌入，还是实质上会压力过大，同时时间区间的部分时间段实质上空闲，浪费资源
+        // String uri = request.getRequestURI();
+        // captcha = "0";
+        // // TODO：这个对吗？uri就是"/seckill/path:13000000258"
+        // Integer count = (Integer) valueOperations.get(uri + ":" + user.getId());
+        // if(count == null){
+        //     valueOperations.set(uri + ":" + user.getId(), 1, 5, TimeUnit.SECONDS);
+        // } else if(count < 5){
+        //     valueOperations.increment(uri + ":" + user.getId());
+        // } else{
+        //     return RespBean.error(RespBeanEnum.ACCESS_LIMIT_REAHCED);
+        // }
+        // // 漏斗方式：保护他人
+        // // 令牌桶算法：保护自己
+        // // 同时这段代码需要在每个接口都拷一遍——拦截器
 
         boolean check = orderService.checkCaptcha(user, goodsId, captcha);
         if(!check){
