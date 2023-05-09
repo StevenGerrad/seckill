@@ -1,7 +1,18 @@
 
-[视频地址](https://www.bilibili.com/video/BV1sf4y1L7KE)
 
-> 注意要采用视频中的框架版本，少走弯路
+
+# 组件安装、配置相关
+[toc]
+
+> [视频地址](https://www.bilibili.com/video/BV1sf4y1L7KE)。注意要采用视频中的框架版本，少走弯路
+
+
+***
+## Java安装
+
+安装验证码插件时jdk19太高了，需要安装新的jdk（参考[《为win10配置多个jdk的方法》](https://zhuanlan.zhihu.com/p/471479970)），同时切换IDEA中jdk的版本（参考[《IDEA项目如何切换JDK版本》](https://blog.csdn.net/weixin_45490198/article/details/125119932)）
+
+## 数据库
 
 创建数据表：
 用户表：
@@ -18,26 +29,6 @@ CREATE TABLE t_user(
    PRIMARY KEY(`id`)
 )
 ```
-
-[代码生成器](https://baomidou.com/pages/d357af/)
-
-[redis安装](https://blog.csdn.net/web18484626332/article/details/126540454)
-
-```bash
-# 进入容器
-docker exec -it redis bash
-# 启动 redis 客户端
-redis-cli
-
-redis 127.0.0.1:6379> PING
-PONG
-
-# 批量删除某种前缀, 实际上更稳妥的可能额要参考https://juejin.cn/post/6844903869412016142（使用scan删除）
-redis-cli keys "order:*" | xargs redis-cli del
-
-```
-
-redis docker 安装：[1](https://cloud.tencent.com/developer/article/1670205),[2](https://www.jianshu.com/p/f62277cf5d0f)
 
 ```sql
 create table `t_goods`(
@@ -94,6 +85,7 @@ INSERT INTO `t_seckill_goods` VALUES(1, 1, '629', 10, '2020-11-01 08:00:00', '20
 
 ```
 
+## linux安装Mysql
 
 linux安装mysql: [1](https://www.runoob.com/docker/docker-install-mysql.html),[2](https://www.cnblogs.com/sablier/p/11605606.html)
 
@@ -116,17 +108,29 @@ GRANT ALL PRIVILEGES ON *.* TO 'xxxx'@'%';
 exit;
 ```
 
-配置自动注释：[《IDEA 方法注释动态添加param和return》](https://www.bilibili.com/read/cv22276744)
+## Redis
+
+[redis安装](https://blog.csdn.net/web18484626332/article/details/126540454)
+
+```bash
+# 进入容器
+docker exec -it redis bash
+# 启动 redis 客户端
+redis-cli
+
+redis 127.0.0.1:6379> PING
+PONG
+
+# 批量删除某种前缀, 实际上更稳妥的可能额要参考https://juejin.cn/post/6844903869412016142（使用scan删除）
+redis-cli keys "order:*" | xargs redis-cli del
+
+```
+
+redis docker 安装：[1](https://cloud.tencent.com/developer/article/1670205),[2](https://www.jianshu.com/p/f62277cf5d0f)
 
 
-# Q & A
 
-| 报错                                                                                   | 解决                                                                                                                             |
-|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| 项目运行报错`Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required`            | [1](https://cloud.tencent.com/developer/article/2177573),[2](https://github.com/baomidou/mybatis-plus/pull/4870)               |
-| maven build报错`Cannot resolve plugin org.apache.maven.plugins:maven-clean-plugin3.0.0` | [1](https://blog.csdn.net/m0_67392126/article/details/124165634),[2](https://blog.csdn.net/liujucai/article/details/102450806) |
-| Redis安装报错：`You need tcl 8.5 or newer in order to run the Redis test`                  | [1](https://blog.csdn.net/zhangshu123321/article/details/51440106)                                                             |
-
+## RabbitMQ
 
 rabbitmq安装参考[《docker安装RabbitMq》](https://juejin.cn/post/6844903970545090574)
 
@@ -136,4 +140,24 @@ docker pull docker.io/rabbitmq:3.10-management
 docker run --name wjyRabbitmq -d -p 15672:15672 -p 5672:5672 9347c9953e5a
 ```
 
-安装验证码插件jdk19太高了，需要安装新的jdk（参考[《为win10配置多个jdk的方法》](https://zhuanlan.zhihu.com/p/471479970)），同时切换IDEA中jdk的版本（参考[《IDEA项目如何切换JDK版本》](https://blog.csdn.net/weixin_45490198/article/details/125119932)）
+
+## 其它
+
+- [代码生成器](https://baomidou.com/pages/d357af/)
+- 配置自动注释：[《IDEA 方法注释动态添加param和return》](https://www.bilibili.com/read/cv22276744)
+
+
+# Q & A
+
+这几个问题实际上在各个框架安装与视频的一致的版本时不会存在
+
+| 报错                                                                                   | 解决                                                                                                                             |
+|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| 项目运行报错`Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required`            | [1](https://cloud.tencent.com/developer/article/2177573),[2](https://github.com/baomidou/mybatis-plus/pull/4870)               |
+| maven build报错`Cannot resolve plugin org.apache.maven.plugins:maven-clean-plugin3.0.0` | [1](https://blog.csdn.net/m0_67392126/article/details/124165634),[2](https://blog.csdn.net/liujucai/article/details/102450806) |
+| Redis安装报错：`You need tcl 8.5 or newer in order to run the Redis test`                  | [1](https://blog.csdn.net/zhangshu123321/article/details/51440106)                                                             |
+
+
+
+
+

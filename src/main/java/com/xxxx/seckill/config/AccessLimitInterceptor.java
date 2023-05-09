@@ -42,6 +42,7 @@ public class AccessLimitInterceptor implements HandlerInterceptor {
             User user = getUser(request, response);
             UserContext.setUser(user);
             HandlerMethod hm = (HandlerMethod) handler;
+            // TODO：为什么这块可以这么用？
             AccessLimit accessLimit = hm.getMethodAnnotation(AccessLimit.class);
             if (accessLimit == null) {
                 return true;

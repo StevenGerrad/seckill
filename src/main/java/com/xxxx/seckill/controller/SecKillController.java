@@ -4,6 +4,7 @@ package com.xxxx.seckill.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wf.captcha.ArithmeticCaptcha;
 import com.xxxx.seckill.config.AccessLimit;
+import com.xxxx.seckill.config.RateLimiter;
 import com.xxxx.seckill.exception.GlobalException;
 import com.xxxx.seckill.pojo.Order;
 import com.xxxx.seckill.pojo.SeckillMessage;
@@ -173,6 +174,7 @@ public class SecKillController implements InitializingBean {
     //         return RespBean.error(RespBeanEnum.EMPTY_STOCK);
     //     }
     //     // 预减库存
+    //     // TODO：原本的decrement满足原子性吗？
     //     Long stock = valueOperations.decrement("seckillGoods:" + goodsId);
     //     if(stock < 0){
     //         EmptyStockMap.put(goodsId, true);
@@ -285,7 +287,8 @@ public class SecKillController implements InitializingBean {
     //     return RespBean.success(str);
     // }
 
-    @AccessLimit(second = 5, maxCount=5, needLogin=true)
+    // @AccessLimit(second = 5, maxCount=5, needLogin=true)
+    @RateLimiter(unit = TimeUnit.SECONDS, time = 10, limit = 5)
     @RequestMapping(value = "/path", method = RequestMethod.GET)
     @ResponseBody
     public RespBean getPath(User user, Long goodsId, String captcha, HttpServletRequest request){

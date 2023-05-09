@@ -22,6 +22,8 @@ public class WebConfig implements WebMvcConfigurer {
     private UserArgumentResolver userArgumentResolver;
     @Autowired
     private AccessLimitInterceptor accessLimitInterceptor;
+    @Autowired
+    private RateLimiterHandlerInterceptor rateLimiterHandlerInterceptor;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
@@ -42,5 +44,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(accessLimitInterceptor);
+        registry.addInterceptor(rateLimiterHandlerInterceptor);
     }
 }

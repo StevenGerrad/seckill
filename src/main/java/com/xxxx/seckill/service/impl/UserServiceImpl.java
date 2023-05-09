@@ -64,6 +64,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         // 生成cookie
         String ticket = UUIDUtil.uuid();
+        // TODO:原来的session是在内存中吗？如果是的话为什么要换成redis呢？
         //request.getSession().setAttribute(ticket, user);
         // 将用户信息存在redis中
         redisTemplate.opsForValue().set("user:" + ticket, user);
